@@ -1,3 +1,5 @@
+const Schemes = require('./schemes-model');
+console.log(Schemes);
 /*
   If `scheme_id` does not exist in the database:
 
@@ -7,8 +9,8 @@
   }
 */
 const checkSchemeId = (req, res, next) => {
-
-}
+  
+};
 
 /*
   If `scheme_name` is missing, empty string or not a string:
