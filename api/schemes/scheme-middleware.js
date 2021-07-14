@@ -9,15 +9,14 @@ const Schemes = require('./scheme-model');
   }
 */
 const checkSchemeId = (req, res, next) => {
-  const id = req.params.id;
-  Schemes.findById(id)
+  const { scheme_id } = req.params;
+  Schemes.findById(scheme_id)
     .then(scheme => {
       if (scheme) {
-      //  req.scheme = scheme; // the router doesn't work in a way that can use this
         next();
       } else {
         res.status(404).json({
-          message: `scheme with scheme_id ${id} not found`
+          message: `scheme with scheme_id ${scheme_id} not found`
         });
       }
     })
