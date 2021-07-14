@@ -1,4 +1,12 @@
+const db = require('../../data/db-config');
+
 function find() { // EXERCISE A
+  return db('schemes as sc')
+    .select('sc.*')
+    .leftJoin('steps as st', 'sc.scheme_id', 'st.scheme_id')
+    .count('st.step_id as number_of_steps')
+    .groupBy('sc.scheme_id')
+    .orderBy('sc.scheme_id');
   /*
     1A- Study the SQL query below running it in SQLite Studio against `data/schemes.db3`.
     What happens if we change from a LEFT join to an INNER join?
@@ -11,6 +19,9 @@ function find() { // EXERCISE A
           ON sc.scheme_id = st.scheme_id
       GROUP BY sc.scheme_id
       ORDER BY sc.scheme_id ASC;
+
+    Replacing left join with inner join removes any row with count(st.step_id) = 0
+
 
     2A- When you have a grasp on the query go ahead and build it in Knex.
     Return from this function the resulting dataset.
