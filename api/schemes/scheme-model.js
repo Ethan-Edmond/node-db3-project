@@ -41,8 +41,10 @@ async function findById(scheme_id) { // EXERCISE B
           return {step_id, step_number, instructions};
         });
   const returnVal = {
-    scheme_id,
-    scheme_name: rows[0].scheme_name,
+    scheme_id: Number(scheme_id),
+    scheme_name: rows.reduce((acc, curr) => {
+      return curr.scheme_name;
+    }, null),
     steps
   };
   return returnVal;

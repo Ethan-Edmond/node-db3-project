@@ -12,13 +12,13 @@ const checkSchemeId = (req, res, next) => {
   const { scheme_id } = req.params;
   Schemes.findById(scheme_id)
     .then(scheme => {
-      if (scheme) {
-        next();
-      } else {
-        res.status(404).json({
-          message: `scheme with scheme_id ${scheme_id} not found`
-        });
-      }
+       if (scheme.scheme_name) {
+         next();
+       } else {
+         res.status(404).json({
+           message: `scheme with scheme_id ${scheme_id} not found`
+         });
+       }
     })
     .catch(next);
 };
@@ -37,7 +37,7 @@ const validateScheme = (req, res, next) => {
     (scheme_name === undefined) ||
       (scheme_name === '') ||
       (typeof scheme_name !== 'string')) {
-    res.status(404).json({
+    res.status(400).json({
       message: 'invalid scheme_name'
     });
   } else {
