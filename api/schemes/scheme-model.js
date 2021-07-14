@@ -145,7 +145,8 @@ function findSteps(scheme_id) { // EXERCISE C
 }
 
 async function add(scheme) { // EXERCISE D
-  return 'add wired';
+  const [newId] = await db('schemes').insert(scheme);
+  return findById(newId);
   /*
     1D- This function creates a new scheme and resolves to _the newly created scheme_.
   */
