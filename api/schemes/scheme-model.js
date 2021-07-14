@@ -114,11 +114,6 @@ async function findById(scheme_id) { // EXERCISE B
 }
 
 function findSteps(scheme_id) { // EXERCISE C
-  // Select st.step_id, st.step_number, st.instructions, sc.scheme_name FROM steps as st
-  // LEFT JOIN schemes as sc
-  // ON st.scheme_id = sc.scheme_id
-  // WHERE st.scheme_id = 2
-  // ORDER BY st.step_number;
   return db('steps as st')
     .select('st.step_id', 'st.step_number', 'st.instructions', 'sc.scheme_name')
     .leftJoin('schemes as sc', 'st.scheme_id', 'sc.scheme_id')
@@ -149,7 +144,8 @@ function findSteps(scheme_id) { // EXERCISE C
   */
 }
 
-function add(scheme) { // EXERCISE D
+async function add(scheme) { // EXERCISE D
+  return 'add wired';
   /*
     1D- This function creates a new scheme and resolves to _the newly created scheme_.
   */

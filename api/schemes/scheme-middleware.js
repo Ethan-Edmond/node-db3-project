@@ -32,8 +32,18 @@ const checkSchemeId = (req, res, next) => {
   }
 */
 const validateScheme = (req, res, next) => {
-
-}
+  const { scheme_name } = req.body;
+  if (
+    (scheme_name === undefined) ||
+      (scheme_name === '') ||
+      (typeof scheme_name !== 'string')) {
+    res.status(404).json({
+      message: 'invalid scheme_name'
+    });
+  } else {
+    next();
+  }
+};
 
 /*
   If `instructions` is missing, empty string or not a string, or
