@@ -114,6 +114,19 @@ async function findById(scheme_id) { // EXERCISE B
 }
 
 function findSteps(scheme_id) { // EXERCISE C
+  // Select st.step_id, st.step_number, st.instructions, sc.scheme_name FROM steps as st
+  // LEFT JOIN schemes as sc
+  // ON st.scheme_id = sc.scheme_id
+  // WHERE st.scheme_id = 2
+  // ORDER BY st.step_number;
+  return db('steps as st')
+    .select('st.step_id', 'st.step_number', 'st.instructions', 'sc.scheme_name')
+    .leftJoin('schemes as sc', 'st.scheme_id', 'sc.scheme_id')
+    .where({
+      "st.scheme_id": scheme_id
+    })
+    .orderBy('st.step_number');
+
   /*
     1C- Build a query in Knex that returns the following data.
     The steps should be sorted by step_number, and the array
